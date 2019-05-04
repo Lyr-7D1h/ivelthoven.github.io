@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Gugi|Montserrat|Ubuntu|Ubuntu+Mono');
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', 'Ubuntu Mono', 'Arial'
+}
+h1, p {
+    text-align: center;
+}
