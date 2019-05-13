@@ -24,9 +24,10 @@ const loadData = (data) => {
 $(() => {
     $(document).ready(function () {
         $.getJSON( API_URL, function( data ) {
+            loadData(data);
         });
     });
-    loadData(example_data);
+    // loadData(example_data);
 });
 
 // const example_data = [
