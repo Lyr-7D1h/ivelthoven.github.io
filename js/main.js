@@ -16,28 +16,29 @@ const loadData = (data) => {
         }
 
         $("#repositories").append(`
-        <div class="col-sm-3 card rounded-0 fade-in repository" style="border: none;"}">
-            <div class="jumbotron" style="z-index: 1">
-              <div class="float-right">
-                ${repo.url ? `<i class="fas fa-sitemap"></i>` : ""}
-                ${repo.deployments ? `<i class="fas fa-satellite-dish"></i>` : ""}
+          <div class="col-sm-3 card rounded-0 repository" style="border: none;"}">
+              <div class="jumbotron fade-in">
+                <div class="float-right">
+                  ${repo.url ? `<i class="fas fa-sitemap"></i>` : ""}
+                  ${repo.deployments ? `<i class="fas fa-satellite-dish"></i>` : ""}
+                </div>
+                  <h2>${repo.name}</h2>
+                  <p class="caption">ID: ${repo.id} | Created on: ${formattedDate}</p>
+                  ${repo.url ? `<a href="${repo.url}" class="btn btn btn-dark" role="button"><i class="fas fa-sitemap"></i> Repository</a>` : ""}
+                  ${repo.deployments ? `<a href="${deploymentUrl}" class="btn btn btn-dark" role="button"><i class="fas fa-satellite-dish"></i> Deployment</a>` : ""}
               </div>
-                <h2>${repo.name}</h2>
-                <p class="caption">ID: ${repo.id} | Created on: ${formattedDate}</p>
-                ${repo.url ? `<a href="${repo.url}" class="btn btn btn-dark" role="button"><i class="fas fa-sitemap"></i> Repository</a>` : ""}
-                ${repo.deployments ? `<a href="${deploymentUrl}" class="btn btn btn-dark" role="button"><i class="fas fa-satellite-dish"></i> Deployment</a>` : ""}
-            </div>
-        </div>
+          </div>
         `)
     }
 }
 const checkFadeIn = () => {
     $(".fade-in").each((i, el) => {
-        let bottom_of_object = $(el).offset().top + 100;// 100 to delay fadeIn effect on scroll   if fully on page: + $(el).outerHeight();
+        let bottom_of_object = $(el).offset().top + 100; // 100 to delay fadeIn effect on scroll   if fully on page: + $(el).outerHeight();
         let bottom_of_window = $(window).scrollTop() + $(window).height();
         if( bottom_of_window > bottom_of_object ){
-            $(el).css("opacity", "1");
-        }
+          console.log($(el), "fading in");
+          $(el).css("opacity", "1");
+        } 
     })
 }
 
@@ -60,19 +61,16 @@ const sortData = (data) => {
 }
 
 
-
-$(() => {
+$(document).ready(() => {
+  checkFadeIn();
+  $(window).scroll(() => {
     checkFadeIn();
-    $(window).scroll(() => {
-        checkFadeIn();
-    })
-    $(document).ready(function () {
-        $.getJSON( API_URL, function( data ) {
-            loadData(data);
-        });
-    });
-    loadData(sortData(example_data));
-});
+  });
+  $.getJSON( API_URL, function( data ) {
+      loadData(sortData(data));
+  });
+  loadData(sortData(example_data));
+})
 
 const example_data = [
     {

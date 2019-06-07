@@ -71,6 +71,10 @@ footer {
     margin-right: 10%;
 }
 
+.no-transition {
+    transition-delay: 0;
+}
+
 .repository {
     color: #23272b;
     background-size: 200% 200%;
