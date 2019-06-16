@@ -1,4 +1,4 @@
-const API_URL = "https://api.ivelthoven.nl/github";
+const API_URL = "https://ivelthoven-api.herokuapp.com/";
 const PROJECTS_URL = "https://projects.ivelthoven.nl/"
 
 const loadData = (data) => {
@@ -8,7 +8,7 @@ const loadData = (data) => {
         let formattedDate = curDateTime.getFullYear() + "-" + (curDateTime.getMonth() + 1) + "-" + curDateTime.getDate()
 
         let deploymentUrl = "";
-        if (repo.deployments === 'github-pages') {
+        if (repo.deployment === 'github-pages') {
             deploymentUrl = PROJECTS_URL + repo.name;
         }
         if (repo.name === "ivelthoven.github.io") {
@@ -20,12 +20,12 @@ const loadData = (data) => {
               <div class="jumbotron fade-in">
                 <div class="float-right">
                   ${repo.url ? `<i class="fas fa-sitemap"></i>` : ""}
-                  ${repo.deployments ? `<i class="fas fa-satellite-dish"></i>` : ""}
+                  ${repo.deployment ? `<i class="fas fa-satellite-dish"></i>` : ""}
                 </div>
                   <h2>${repo.name}</h2>
                   <p class="caption">ID: ${repo.id} | Created on: ${formattedDate}</p>
                   ${repo.url ? `<a href="${repo.url}" class="btn btn btn-dark" role="button"><i class="fas fa-sitemap"></i> Repository</a>` : ""}
-                  ${repo.deployments ? `<a href="${deploymentUrl}" class="btn btn btn-dark" role="button"><i class="fas fa-satellite-dish"></i> Deployment</a>` : ""}
+                  ${repo.deployment ? `<a href="${deploymentUrl}" class="btn btn btn-dark" role="button"><i class="fas fa-satellite-dish"></i> Deployment</a>` : ""}
               </div>
           </div>
         `)
@@ -53,7 +53,7 @@ const sortData = (data) => {
     let deployed = [];
     let other = [];
     for (let i in data) {
-        data[i].deployments ? deployed.push(data[i]) : other.push(data[i]);
+        data[i].deployment ? deployed.push(data[i]) : other.push(data[i]);
     }
     let sorted = sortByDate(deployed).concat(sortByDate(other));
     return sorted;
