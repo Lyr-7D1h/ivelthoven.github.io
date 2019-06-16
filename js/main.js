@@ -1,4 +1,4 @@
-const API_URL = "https://ivelthoven-api.herokuapp.com/";
+const API_URL = "https://ivelthoven-api.herokuapp.com/github";
 const PROJECTS_URL = "https://projects.ivelthoven.nl/"
 
 const loadData = (data) => {
